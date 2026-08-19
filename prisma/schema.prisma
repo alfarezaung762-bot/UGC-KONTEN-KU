@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Gerakan {
+  id            String   @id @default(cuid())
+  kode          String   @unique
+  nama          String
+  kategori      String
+  kategoriLabel String
+  tipe          String
+  durasiMin     Int
+  durasiMax     Int
+  deskripsi     String
+  tujuan        String
+  kondisi       String?
+  status        String   @default("tersedia")
+  dipakaiDi     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  kombinasiGerakan KombinasiGerakan[]
+
+  @@map("gerakan")
+}
+
+model Kombinasi {
+  id           String   @id @default(cuid())
+  nama         String
+  deskripsi    String?
+  targetDurasi Int      @default(10)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  gerakanList KombinasiGerakan[]
+
+  @@map("kombinasi")
+}
+
+model KombinasiGerakan {
+  id             String   @id @default(cuid())
+  kombinasiId    String
+  gerakanId      String
+  urutan         Int
+  durasiOverride Int?
+
+  kombinasi Kombinasi @relation(fields: [kombinasiId], references: [id], onDelete: Cascade)
+  gerakan   Gerakan   @relation(fields: [gerakanId], references: [id], onDelete: Cascade)
+
+  @@unique([kombinasiId, urutan])
+  @@map("kombinasi_gerakan")
+}
