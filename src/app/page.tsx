@@ -239,6 +239,23 @@ export default function HomePage() {
     await fetchData();
   };
 
+  // Update combination preset (name, description, urutan)
+  const handleUpdateKombinasi = async (
+    id: string,
+    data: { nama: string; deskripsi: string | null; targetDurasi?: number; urutan?: number }
+  ) => {
+    const res = await fetch(`/api/kombinasi/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    if (!result.success) throw new Error(result.error);
+
+    showToast(`Preset "${result.data.nama}" berhasil diperbarui!`);
+    await fetchData();
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
       {/* Navigation Header */}
@@ -330,6 +347,7 @@ export default function HomePage() {
             kombinasiList={kombinasiList}
             onLoadKombinasi={handleLoadKombinasi}
             onDeleteKombinasi={handleDeleteKombinasi}
+            onUpdateKombinasi={handleUpdateKombinasi}
             onSwitchToBuilder={() => setActiveTab("builder")}
           />
         )}

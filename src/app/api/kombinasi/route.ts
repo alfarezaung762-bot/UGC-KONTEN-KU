@@ -10,7 +10,10 @@ export async function GET() {
           include: { gerakan: true },
         },
       },
-      orderBy: { createdAt: "desc" },
+      orderBy: [
+        { urutan: "asc" },
+        { createdAt: "desc" },
+      ],
     });
 
     return NextResponse.json({ success: true, data: kombinasiList });
@@ -26,7 +29,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { nama, deskripsi, targetDurasi, gerakanItems } = body;
+    const { nama, deskripsi, targetDurasi, urutan, gerakanItems } = body;
 
     if (!nama || !gerakanItems || !Array.isArray(gerakanItems) || gerakanItems.length === 0) {
       return NextResponse.json(
@@ -40,6 +43,7 @@ export async function POST(req: NextRequest) {
         nama: nama.trim(),
         deskripsi: deskripsi ? deskripsi.trim() : null,
         targetDurasi: Number(targetDurasi) || 10,
+        urutan: urutan !== undefined && urutan !== "" ? Number(urutan) : 0,
         gerakanList: {
           create: gerakanItems.map((item: any, index: number) => ({
             gerakanId: item.gerakanId,

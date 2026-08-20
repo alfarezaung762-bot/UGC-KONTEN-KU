@@ -33,6 +33,7 @@ model Kombinasi {
   nama         String
   deskripsi    String?
   targetDurasi Int      @default(10)
+  urutan       Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 

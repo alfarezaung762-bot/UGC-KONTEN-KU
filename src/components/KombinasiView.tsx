@@ -1,21 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   BookmarkCheck,
   Clock,
   Trash2,
+  Edit2,
   Sparkles,
   ArrowRight,
   Layers,
   Calendar,
+  ArrowDownUp,
 } from "lucide-react";
 import { KombinasiType, KATEGORI_CONFIG } from "@/lib/types";
+import { EditKombinasiModal } from "./EditKombinasiModal";
 
 interface KombinasiViewProps {
   kombinasiList: KombinasiType[];
   onLoadKombinasi: (kombinasi: KombinasiType) => void;
   onDeleteKombinasi: (id: string) => Promise<void>;
+  onUpdateKombinasi?: (
+    id: string,
+    data: { nama: string; deskripsi: string | null; targetDurasi?: number; urutan?: number }
+  ) => Promise<void>;
   onSwitchToBuilder: () => void;
 }
 
@@ -23,9 +30,23 @@ export function KombinasiView({
   kombinasiList,
   onLoadKombinasi,
   onDeleteKombinasi,
+  onUpdateKombinasi,
   onSwitchToBuilder,
 }: KombinasiViewProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [editingKombinasi, setEditingKombinasi] = useState<KombinasiType | null>(null);
+
+  // Urutkan kombinasi: urutan semakin rendah (1, 2, 3...) semakin ke atas / awal
+  const sortedKombinasiList = useMemo(() => {
+    return [...kombinasiList].sort((a, b) => {
+      const orderA = a.urutan !== undefined && a.urutan !== null ? a.urutan : 999;
+      const orderB = b.urutan !== undefined && b.urutan !== null ? b.urutan : 999;
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+      return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+    });
+  }, [kombinasiList]);
 
   const handleDelete = async (id: string, nama: string) => {
     if (!window.confirm(`Hapus preset kombinasi "${nama}"?`)) return;
@@ -36,6 +57,16 @@ export function KombinasiView({
       setDeletingId(null);
     }
   };
+
+  const handleSaveEdit = async (
+    id: string,
+    data: { nama: string; deskripsi: string | null; targetDurasi?: number; urutan?: number }
+  ) => {
+    if (onUpdateKombinasi) {
+      await onUpdateKombinasi(id, data);
+    }
+  };
+
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -68,7 +99,7 @@ export function KombinasiView({
 
       {/* Kombinasi Grid */}
       <div className="mt-8">
-        {kombinasiList.length === 0 ? (
+        {sortedKombinasiList.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-900/40 p-12 text-center">
             <BookmarkCheck className="mx-auto h-12 w-12 text-slate-600 mb-3" />
             <h3 className="text-base font-bold text-white mb-1">
@@ -86,7 +117,7 @@ export function KombinasiView({
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {kombinasiList.map((k) => {
+            {sortedKombinasiList.map((k) => {
               const totalSec = k.gerakanList?.reduce(
                 (acc, curr) => acc + (curr.durasiOverride || curr.gerakan?.durasiMin || 2),
                 0
@@ -98,9 +129,18 @@ export function KombinasiView({
                   className="group relative flex flex-col justify-between rounded-2xl border border-slate-800/90 bg-slate-900/80 p-5 transition-all duration-200 hover:border-blue-500/50 hover:bg-slate-900 shadow-xl backdrop-blur-md"
                 >
                   <div>
-                    {/* Header: Name & Target */}
+                    {/* Header: Name, Urutan & Target Duration */}
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
+                          <span
+                            className="font-mono text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded-md flex items-center gap-1 shadow-sm"
+                            title={`Urutan tampilan: ${k.urutan ?? 0}`}
+                          >
+                            <ArrowDownUp className="h-2.5 w-2.5 text-amber-400" />
+                            <span>Urutan #{k.urutan ?? 0}</span>
+                          </span>
+                        </div>
                         <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
                           {k.nama}
                         </h3>
@@ -163,14 +203,24 @@ export function KombinasiView({
 
                   {/* Footer Actions */}
                   <div className="mt-6 flex items-center justify-between border-t border-slate-800/80 pt-4">
-                    <button
-                      onClick={() => handleDelete(k.id, k.nama)}
-                      disabled={deletingId === k.id}
-                      className="rounded-lg p-2 text-slate-500 hover:bg-rose-500/10 hover:text-rose-400 transition-colors"
-                      title="Hapus preset"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => setEditingKombinasi(k)}
+                        className="rounded-lg p-2 text-slate-400 hover:bg-blue-500/10 hover:text-blue-400 transition-colors"
+                        title="Edit nama & deskripsi preset"
+                      >
+                        <Edit2 className="h-4 w-4" />
+                      </button>
+
+                      <button
+                        onClick={() => handleDelete(k.id, k.nama)}
+                        disabled={deletingId === k.id}
+                        className="rounded-lg p-2 text-slate-500 hover:bg-rose-500/10 hover:text-rose-400 transition-colors"
+                        title="Hapus preset"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
 
                     <button
                       onClick={() => onLoadKombinasi(k)}
@@ -186,6 +236,14 @@ export function KombinasiView({
           </div>
         )}
       </div>
+
+      {/* Edit Modal */}
+      <EditKombinasiModal
+        isOpen={Boolean(editingKombinasi)}
+        onClose={() => setEditingKombinasi(null)}
+        kombinasi={editingKombinasi}
+        onSave={handleSaveEdit}
+      />
     </div>
   );
 }

@@ -36,6 +36,7 @@ export interface KombinasiType {
   nama: string;
   deskripsi: string | null;
   targetDurasi: number;
+  urutan?: number;
   createdAt?: string;
   updatedAt?: string;
   gerakanList: KombinasiGerakanItem[];

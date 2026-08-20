@@ -21,6 +21,7 @@ export function SaveKombinasiModal({
 }: SaveKombinasiModalProps) {
   const [nama, setNama] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
+  const [urutan, setUrutan] = useState<number | string>(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,6 +45,7 @@ export function SaveKombinasiModal({
           nama: nama.trim(),
           deskripsi: deskripsi.trim() || null,
           targetDurasi: targetDuration,
+          urutan: urutan !== "" ? Number(urutan) : 0,
           gerakanItems: selectedGerakan.map((item) => ({
             gerakanId: item.gerakan.id,
             durasi: item.durasi,
@@ -131,6 +133,29 @@ export function SaveKombinasiModal({
               placeholder="misal: Try-On Hoodie Santai (10s), Pamer Zipper & Fit"
               className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-white text-xs focus:border-blue-500 focus:outline-none"
             />
+          </div>
+
+          {/* Preset Urutan (Sort Order) */}
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-slate-300 font-semibold block">
+                Urutan Tampilan Preset
+              </label>
+              <span className="text-[10px] text-blue-400 font-mono">
+                Semakin kecil = semakin atas
+              </span>
+            </div>
+            <input
+              type="number"
+              min="0"
+              value={urutan}
+              onChange={(e) => setUrutan(e.target.value)}
+              placeholder="1"
+              className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-white text-xs focus:border-blue-500 focus:outline-none"
+            />
+            <p className="mt-1 text-[10px] text-slate-400">
+              Preset dengan urutan angka lebih kecil (misal: 1, 2, 3...) akan tampil di posisi paling atas/awal.
+            </p>
           </div>
 
           {/* Preset Description */}
