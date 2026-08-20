@@ -34,7 +34,7 @@ export function RulesetGuideView() {
               </span>
             </h3>
             <div className="font-mono text-xs text-slate-200 bg-slate-950/90 p-4 rounded-xl border border-slate-800 leading-relaxed shadow-inner">
-              <strong>Background:</strong> [BACKGROUND] — lokasi, mood, warna, lighting, dan komposisi environment HARUS konsisten mengikuti foto ini di semua shot. JANGAN berubah drastis (jangan jadi lebih gelap/terang dari foto aslinya, objek/furniture di background jangan berpindah posisi atau berubah bentuk).
+              <strong>Background:</strong> [BACKGROUND] lokasi, warna, lighting, dan komposisi environment HARUS konsisten mengikuti foto ini di semua shot. JANGAN berubah drastis (jangan jadi lebih gelap/terang dari foto aslinya, objek/furniture di background jangan berpindah posisi atau berubah bentuk).
               <br /><br />
               <span className="text-emerald-400 font-bold">
                 Prioritas jika ada KONFLIK/tabrakan antar elemen: PRODUK &gt; CREATOR &gt; BACKGROUND.

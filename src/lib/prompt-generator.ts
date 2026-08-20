@@ -24,9 +24,9 @@ export function generatePrompt({
 
   // Blok referensi gambar — aturan produk & creator langsung menyatu di sini (lebih efisien, kurangi konteks berlebih)
   const referensiGambar = `=== REFERENSI GAMBAR ===
-- Product: ${productRef} — Ikuti foto ${productRef} 100% akurat: bentuk, warna, motif, jahitan, kancing/resleting, saku, logo/teks, tekstur sama persis di semua frame. Sisi tak terlihat buat polos/netral. JANGAN tambah fitur fiktif. Resleting/kancing diam di posisi tertutup, tangan hanya menyentuh kain di sekitarnya.
-- Creator: ${creatorRef} — Wajah, gaya rambut, warna kulit, dan proporsi tubuh sama persis dengan foto ${creatorRef}. Mulut diam natural, TIDAK ADA gerakan bibir bicara/lipsync.
-- Background: ${backgroundRef} — lokasi, mood, warna, lighting, dan komposisi environment HARUS konsisten mengikuti foto ini di semua shot. JANGAN berubah drastis (jangan jadi lebih gelap/terang dari foto aslinya, objek/furniture di background jangan berpindah posisi atau berubah bentuk). Prioritas kalau ada KONFLIK/tabrakan antar elemen (bukan berarti boleh diabaikan): produk > creator > background.`;
+- Product: ${productRef} Ikuti foto ${productRef} 100% akurat: bentuk, warna, motif, jahitan, kancing/resleting, saku, logo/teks, tekstur sama persis di semua frame. Sisi tak terlihat buat polos/netral. JANGAN tambah fitur fiktif. Resleting/kancing diam di posisi tertutup, tangan hanya menyentuh kain di sekitarnya.
+- Creator: ${creatorRef}Wajah, gaya rambut, warna kulit, dan proporsi tubuh sama persis dengan foto ${creatorRef}. Mulut diam natural, TIDAK ADA gerakan bibir bicara/lipsync.
+- Background: ${backgroundRef} lokasi,warna, lighting, dan komposisi environment HARUS konsisten mengikuti foto ini di semua shot. JANGAN berubah drastis (jangan jadi lebih gelap/terang dari foto aslinya, objek/furniture di background jangan berpindah posisi atau berubah bentuk). Prioritas kalau ada KONFLIK/tabrakan antar elemen (bukan berarti boleh diabaikan): produk > creator > background.`;
 
   // Blok aturan master — hanya anatomi/gerakan & kamera (produk & creator sudah di atas)
   const aturanMaster = `=== ATURAN MASTER (MINIM HALUSINASI) ===
