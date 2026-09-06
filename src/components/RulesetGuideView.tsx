@@ -28,65 +28,58 @@ export function RulesetGuideView() {
           <ShieldCheck className="h-6 w-6 text-blue-400 shrink-0 mt-0.5" />
           <div className="space-y-2">
             <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <span>Formula Konsistensi Visual 3-Elemen:</span>
+              <span>SISTEM REFERENSI MUTLAK:</span>
               <span className="rounded-full bg-blue-500/20 px-2 py-0.2 text-[10px] font-mono text-blue-300 border border-blue-500/30">
-                PRODUK &gt; CREATOR &gt; BACKGROUND
+                PRODUCT &gt; CREATOR &gt; BACKGROUND
               </span>
             </h3>
-            <div className="font-mono text-xs text-slate-200 bg-slate-950/90 p-4 rounded-xl border border-slate-800 leading-relaxed shadow-inner">
-              <strong>Background:</strong> [BACKGROUND] lokasi, warna, lighting, dan komposisi environment HARUS konsisten mengikuti foto ini di semua shot. JANGAN berubah drastis (jangan jadi lebih gelap/terang dari foto aslinya, objek/furniture di background jangan berpindah posisi atau berubah bentuk).
-              <br /><br />
-              <span className="text-emerald-400 font-bold">
-                Prioritas jika ada KONFLIK/tabrakan antar elemen: PRODUK &gt; CREATOR &gt; BACKGROUND.
-              </span>
+            <div className="font-mono text-xs text-slate-200 bg-slate-950/90 p-4 rounded-xl border border-slate-800 leading-relaxed shadow-inner space-y-2">
+              <p>
+                <strong className="text-blue-400">PRODUCT-ACCURACY:</strong> Gunakan [PRODUCT] sebagai identitas visual utama. Motif, warna, dan tekstur kemeja harus 100% identik dengan foto di setiap shot. Jangan memodifikasi corak.
+              </p>
+              <p>
+                <strong className="text-blue-400">CREATOR-CONSISTENCY:</strong> Gunakan [CREATOR] sebagai model. Wajah, rambut, dan aksesori (kalung/chain) harus konsisten. SILENT, tidak ada gerakan mulut/bicara.
+              </p>
+              <p>
+                <strong className="text-blue-400">ENVIRONMENT-LOCK:</strong> Lokasi video WAJIB berada di dalam [BACKGROUND]. Elemen kunci seperti cermin bulat backlit, dinding beton, dan lighting strips harus terlihat jelas untuk menetapkan lokasi yang konsisten.
+              </p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Core Rules Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Produk Rule */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Gerakan Rule */}
         <div className="rounded-2xl border border-slate-800/90 bg-slate-900/80 p-5 space-y-2 hover:border-blue-500/40 transition-colors">
           <h4 className="text-sm font-bold text-blue-400 flex items-center gap-2">
             <CheckCircle className="h-4 w-4 text-blue-400" />
-            1. Aturan Akurasi Produk (100%)
+            1. Aturan Gerakan & Anatomi
           </h4>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Bentuk, warna, motif, jahitan, kancing/resleting, saku, dan logo wajib sama persis di semua frame. Sisi tidak terlihat dibuat polos/netral konsisten. JANGAN tambah fitur fiktif. Resleting/kancing tetap diam di posisi tertutup — tangan hanya menyentuh area kain di sekitarnya.
+            Anatomi manusia normal (5 jari, 2 tangan). Maksimal <strong>satu tangan aktif</strong> menyentuh kain produk secara natural. Kecepatan <strong>real-time</strong>, gerakan non-repetitif.
           </p>
         </div>
 
-        {/* Creator Rule */}
+        {/* Kamera Rule */}
         <div className="rounded-2xl border border-slate-800/90 bg-slate-900/80 p-5 space-y-2 hover:border-blue-500/40 transition-colors">
           <h4 className="text-sm font-bold text-blue-400 flex items-center gap-2">
             <CheckCircle className="h-4 w-4 text-blue-400" />
-            2. Karakter & Wajah (Silent Review)
+            2. Aturan Kamera Handheld
           </h4>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Wajah, rambut (model & warna), warna kulit, dan postur mengikuti foto referensi. Karakter <strong>diam total, tidak bicara, tidak lipsync</strong>. Mulut diam natural (senyum tipis diperbolehkan tanpa gerak bibir bicara).
+            <strong>Fixed shot</strong> dengan micro-shaking handheld organik. Hindari kesan statis tripod mati atau efek green-screen composite buatan.
           </p>
         </div>
 
-        {/* Anatomi Rule */}
+        {/* Clean Frame Rule */}
         <div className="rounded-2xl border border-slate-800/90 bg-slate-900/80 p-5 space-y-2 hover:border-blue-500/40 transition-colors">
           <h4 className="text-sm font-bold text-blue-400 flex items-center gap-2">
             <CheckCircle className="h-4 w-4 text-blue-400" />
-            3. Anatomi & Satu Tangan Aktif
+            3. Clean Frame (Zero Clutter)
           </h4>
           <p className="text-xs text-slate-300 leading-relaxed">
-            2 tangan dan 2 kaki normal. <strong>Hanya SATU tangan aktif per momen</strong>, KECUALI gestur simetris 2 tangan identik (misal mengelus kedua pundak). Hindari menyentuh area punggung tengah yang tidak wajar dijangkau. Angle belakang gunakan 3/4.
-          </p>
-        </div>
-
-        {/* Gerakan & Kamera Rule */}
-        <div className="rounded-2xl border border-slate-800/90 bg-slate-900/80 p-5 space-y-2 hover:border-blue-500/40 transition-colors">
-          <h4 className="text-sm font-bold text-blue-400 flex items-center gap-2">
-            <CheckCircle className="h-4 w-4 text-blue-400" />
-            4. Kecepatan & Gaya Kamera
-          </h4>
-          <p className="text-xs text-slate-300 leading-relaxed">
-            Kecepatan <strong>normal/real-time</strong> (BUKAN slow-motion). DILARANG gerakan berulang/joget/ritmis — tiap gestur 1x saja. Kamera FIX/statis dengan micro-shake handheld yang sangat halus agar tidak terlihat green-screen buatan.
+            <strong>Dilarang keras</strong> menambahkan teks, logo, watermark, musik, audio voiceover, atau elemen UI apapun di dalam frame video.
           </p>
         </div>
       </div>

@@ -57,7 +57,7 @@ export const DEFAULT_MASTER_RULE_CONFIG: MasterRuleConfig = {
   backgroundPlaceholder: "[BACKGROUND]",
   includeMasterRules: true,
   audienceContext: "anak muda, anak kuliah, anak SMK, remaja usia 20-30 tahun",
-  cameraStyle: "FIX/STATIS dengan micro-movement handheld halus (bukan tripod mati, hindari kesan green-screen)",
+  cameraStyle: "Fixed shot dengan micro-shaking handheld organik. Hindari kesan statis tripod atau green-screen.",
 };
 
 export const KATEGORI_CONFIG: Record<
