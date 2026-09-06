@@ -257,7 +257,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+    <div className="flex min-h-screen flex-col bg-[#f8f9fa] text-[#212529] antialiased selection:bg-blue-600 selection:text-white">
       {/* Navigation Header */}
       <Navbar
         activeTab={activeTab}
@@ -266,10 +266,10 @@ export default function HomePage() {
         totalKombinasiCount={kombinasiList.length}
       />
 
-      {/* Toast Notification */}
+      {/* Toast Notification (Bootstrap Alert Style) */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-xl border border-blue-500/40 bg-slate-900/95 px-4 py-3 text-xs font-semibold text-white shadow-2xl backdrop-blur-md animate-bounce">
-          <span className="flex h-2 w-2 rounded-full bg-blue-400"></span>
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-lg border border-blue-200 bg-white px-4 py-3 text-xs font-semibold text-blue-900 shadow-md animate-fadeIn">
+          <span className="flex h-2.5 w-2.5 rounded-full bg-blue-600"></span>
           <span>{toastMessage}</span>
         </div>
       )}
@@ -279,7 +279,7 @@ export default function HomePage() {
         {activeTab === "builder" && (
           <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 min-h-[calc(100vh-64px)]">
             {/* Sidebar Gerakan (3 cols on lg) */}
-            <aside className="lg:col-span-3 h-auto lg:h-[calc(100vh-64px)] border-b lg:border-b-0">
+            <aside className="lg:col-span-3 h-auto lg:h-[calc(100vh-64px)] border-b lg:border-b-0 border-slate-200">
               <GerakanSidebar
                 gerakanList={gerakanList}
                 kombinasiList={kombinasiList}
@@ -295,7 +295,7 @@ export default function HomePage() {
             </aside>
 
             {/* Timeline Builder Canvas (5 cols on lg) */}
-            <section className="lg:col-span-5 h-auto lg:h-[calc(100vh-64px)] border-b lg:border-b-0 border-slate-800">
+            <section className="lg:col-span-5 h-auto lg:h-[calc(100vh-64px)] border-b lg:border-b-0 border-slate-200">
               <BuilderCanvas
                 selectedGerakan={selectedGerakan}
                 targetDuration={targetDuration}

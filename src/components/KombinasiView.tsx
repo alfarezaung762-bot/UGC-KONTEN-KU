@@ -8,8 +8,6 @@ import {
   Edit2,
   Sparkles,
   ArrowRight,
-  Layers,
-  Calendar,
   ArrowDownUp,
 } from "lucide-react";
 import { KombinasiType, KATEGORI_CONFIG } from "@/lib/types";
@@ -67,21 +65,20 @@ export function KombinasiView({
     }
   };
 
-
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 pb-5">
         <div>
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-emerald-500/20 border border-blue-500/30 text-blue-400 shadow-sm">
+            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 border border-blue-200 text-blue-600 shadow-xs">
               <BookmarkCheck className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white tracking-tight">
+              <h2 className="text-xl font-bold text-slate-900 tracking-tight">
                 Preset Kombinasi Gerakan
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 Pilih atau simpan rangkaian shot favorit untuk dipakai ulang dengan 1 kali klik
               </p>
             </div>
@@ -90,7 +87,7 @@ export function KombinasiView({
 
         <button
           onClick={onSwitchToBuilder}
-          className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-blue-500 active:scale-95 transition-all shadow-lg shadow-blue-500/25 ring-1 ring-blue-400/30"
+          className="flex items-center justify-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 transition-all shadow-xs"
         >
           <Sparkles className="h-4 w-4" />
           <span>Buka Prompt Builder</span>
@@ -98,19 +95,19 @@ export function KombinasiView({
       </div>
 
       {/* Kombinasi Grid */}
-      <div className="mt-8">
+      <div className="mt-6">
         {sortedKombinasiList.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-900/40 p-12 text-center">
-            <BookmarkCheck className="mx-auto h-12 w-12 text-slate-600 mb-3" />
-            <h3 className="text-base font-bold text-white mb-1">
+          <div className="rounded-lg border border-dashed border-slate-300 bg-white p-12 text-center shadow-xs">
+            <BookmarkCheck className="mx-auto h-12 w-12 text-slate-400 mb-3" />
+            <h3 className="text-base font-bold text-slate-900 mb-1">
               Belum Ada Preset Tersimpan
             </h3>
-            <p className="text-xs text-slate-400 max-w-md mx-auto mb-6">
+            <p className="text-xs text-slate-500 max-w-md mx-auto mb-6 leading-relaxed">
               Susun gerakan di <strong>Prompt Builder</strong> lalu klik tombol <strong>"Simpan Preset"</strong> untuk menyimpannya di sini.
             </p>
             <button
               onClick={onSwitchToBuilder}
-              className="rounded-xl bg-blue-600 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 transition-all shadow-md shadow-blue-500/20"
+              className="rounded-md bg-blue-600 px-4 py-2 text-xs font-bold text-white hover:bg-blue-700 transition-all shadow-xs"
             >
               Mulai Susun Gerakan
             </button>
@@ -126,7 +123,7 @@ export function KombinasiView({
               return (
                 <div
                   key={k.id}
-                  className="group relative flex flex-col justify-between rounded-2xl border border-slate-800/90 bg-slate-900/80 p-5 transition-all duration-200 hover:border-blue-500/50 hover:bg-slate-900 shadow-xl backdrop-blur-md"
+                  className="group relative flex flex-col justify-between rounded-lg border border-slate-200 bg-white p-5 transition-all duration-150 hover:border-blue-400 hover:shadow-sm"
                 >
                   <div>
                     {/* Header: Name, Urutan & Target Duration */}
@@ -134,32 +131,32 @@ export function KombinasiView({
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <span
-                            className="font-mono text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded-md flex items-center gap-1 shadow-sm"
+                            className="font-mono text-[10px] font-bold text-blue-800 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded flex items-center gap-1"
                             title={`Urutan tampilan: ${k.urutan ?? 0}`}
                           >
-                            <ArrowDownUp className="h-2.5 w-2.5 text-amber-400" />
+                            <ArrowDownUp className="h-2.5 w-2.5 text-blue-600" />
                             <span>Urutan #{k.urutan ?? 0}</span>
                           </span>
                         </div>
-                        <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
+                        <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                           {k.nama}
                         </h3>
                         {k.deskripsi && (
-                          <p className="mt-1 text-xs text-slate-400 leading-relaxed line-clamp-2">
+                          <p className="mt-1 text-xs text-slate-600 leading-relaxed line-clamp-2">
                             {k.deskripsi}
                           </p>
                         )}
                       </div>
 
-                      <span className="flex items-center gap-1 font-mono text-xs font-bold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-lg shrink-0">
-                        <Clock className="h-3 w-3 text-emerald-400" />
+                      <span className="flex items-center gap-1 font-mono text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded shrink-0">
+                        <Clock className="h-3 w-3 text-emerald-600" />
                         {totalSec}s
                       </span>
                     </div>
 
                     {/* Movement Sequence Chips */}
-                    <div className="mt-4 space-y-2 border-t border-slate-800/80 pt-3">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                    <div className="mt-4 space-y-2 border-t border-slate-100 pt-3">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
                         Urutan Shot ({k.gerakanList?.length || 0} Beat):
                       </span>
 
@@ -168,30 +165,25 @@ export function KombinasiView({
                           const g = item.gerakan;
                           if (!g) return null;
                           const dur = item.durasiOverride || g.durasiMin;
-                          const catConfig = KATEGORI_CONFIG[g.kategori] || {
-                            badgeBg: "bg-slate-800 text-slate-300",
-                          };
 
                           return (
                             <div
                               key={item.id || idx}
-                              className="flex items-center justify-between rounded-lg bg-slate-950/80 px-2.5 py-1.5 text-xs text-slate-300 border border-slate-800/60"
+                              className="flex items-center justify-between rounded bg-slate-50 px-2.5 py-1.5 text-xs text-slate-700 border border-slate-200"
                             >
                               <div className="flex items-center gap-2">
-                                <span className="font-mono text-[10px] text-slate-400 font-semibold">
+                                <span className="font-mono text-[10px] text-slate-400 font-bold">
                                   #{idx + 1}
                                 </span>
-                                <span
-                                  className={`font-mono text-[10px] font-bold px-1.5 py-0.2 rounded ${catConfig.badgeBg}`}
-                                >
+                                <span className="font-mono text-[10px] font-bold px-1.5 py-0.2 rounded bg-blue-50 text-blue-700 border border-blue-200">
                                   {g.kode}
                                 </span>
-                                <span className="text-slate-200 text-xs truncate max-w-[140px] font-medium">
+                                <span className="text-slate-800 text-xs truncate max-w-[140px] font-semibold">
                                   {g.nama}
                                 </span>
                               </div>
 
-                              <span className="font-mono text-[11px] text-blue-400 font-semibold">
+                              <span className="font-mono text-[11px] text-blue-700 font-bold">
                                 {dur}s
                               </span>
                             </div>
@@ -202,11 +194,11 @@ export function KombinasiView({
                   </div>
 
                   {/* Footer Actions */}
-                  <div className="mt-6 flex items-center justify-between border-t border-slate-800/80 pt-4">
+                  <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3.5">
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => setEditingKombinasi(k)}
-                        className="rounded-lg p-2 text-slate-400 hover:bg-blue-500/10 hover:text-blue-400 transition-colors"
+                        className="rounded p-1.5 text-slate-500 hover:bg-slate-100 hover:text-blue-600 transition-colors"
                         title="Edit nama & deskripsi preset"
                       >
                         <Edit2 className="h-4 w-4" />
@@ -215,7 +207,7 @@ export function KombinasiView({
                       <button
                         onClick={() => handleDelete(k.id, k.nama)}
                         disabled={deletingId === k.id}
-                        className="rounded-lg p-2 text-slate-500 hover:bg-rose-500/10 hover:text-rose-400 transition-colors"
+                        className="rounded p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-700 transition-colors"
                         title="Hapus preset"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -224,7 +216,7 @@ export function KombinasiView({
 
                     <button
                       onClick={() => onLoadKombinasi(k)}
-                      className="flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-blue-500 active:scale-95 transition-all shadow-md shadow-blue-500/20"
+                      className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 transition-all shadow-2xs"
                     >
                       <span>Gunakan Preset</span>
                       <ArrowRight className="h-3.5 w-3.5" />
